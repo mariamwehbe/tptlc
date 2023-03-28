@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  mon-service-de-reverse:
+    image: jwilder/nginx-proxy
+    ports:
+      - 8080:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+  mon-service-nginx:
+    depends_on: 
+      - mon-service-de-reverse
+    image: nginx
+    environment:
+      VIRTUAL_HOST: m 
+    deploy:
+      replicas: 4
